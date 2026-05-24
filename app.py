@@ -8,13 +8,13 @@ from tensorflow.keras.models import load_model
 st.set_page_config(
     page_title="Phân loại Hoa Iris - Nhóm 6",
     page_icon="🌸",
-    layout="wide" # Sử dụng giao diện rộng để chia 2 cột cho đẹp
+    layout="wide"
 )
 
 # 2. Hàm tải các file Model và Tiền xử lý (đã lưu từ Colab)
 @st.cache_resource
 def load_prediction_resources():
-    model = load_model("ann_iris_model.keras", compile=False) # Bỏ qua compile để tránh lệch phiên bản
+    model = load_model("ann_iris_model.keras", compile=False)
     with open("scaler.pkl", "rb") as f:
         scaler = pickle.load(f)
     with open("label_encoder.pkl", "rb") as f:
@@ -54,7 +54,6 @@ col_trai, col_phai = st.columns([1, 1])
 with col_trai:
     st.subheader("📥 Nhập thông số đặc trưng (cm):")
     
-    # Tạo giao diện nhập số gọn gàng
     sub_col1, sub_col2 = st.columns(2)
     with sub_col1:
         sepal_length = st.number_input("Chiều dài đài hoa (Sepal Length)", min_value=0.0, max_value=10.0, value=5.1, step=0.1)
@@ -65,23 +64,20 @@ with col_trai:
     
     st.markdown("---")
     
-    # Tạo một biến trạng thái (Session State) để lưu kết quả dự đoán giữa các lần load trang
-    if 'predicted_flower' not def:
+    # Kiểm tra biến trạng thái tồn tại chưa bằng cú pháp chuẩn 'not in st.session_state'
+    if 'predicted_flower' not in st.session_state:
         st.session_state.predicted_flower = None
         st.session_state.confidence = 0.0
         st.session_state.prediction_proba = None
 
     # Xử lý logic khi bấm nút Dự đoán
     if st.button("🔮 Dự đoán loài hoa", type="primary", use_container_width=True):
-        # Gom số liệu thành mảng 2D và chuẩn hóa
         input_data = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
         input_scaled = scaler.transform(input_data)
         
-        # Dự đoán bằng mạng ANN
         prediction_proba = model.predict(input_scaled)
         predicted_class_idx = np.argmax(prediction_proba, axis=1)
         
-        # Lưu kết quả vào trạng thái hệ thống
         st.session_state.predicted_flower = label_encoder.inverse_transform(predicted_class_idx)[0]
         st.session_state.confidence = prediction_proba[0][predicted_class_idx[0]] * 100
         st.session_state.prediction_proba = prediction_proba[0]
@@ -98,19 +94,16 @@ with col_trai:
 with col_phai:
     st.subheader("🖥️ Kết quả kết xuất hình ảnh")
     
-    # Nếu người dùng chưa bấm nút dự đoán, hiển thị ảnh sơ đồ hướng dẫn đo hoa mặc định
     if st.session_state.predicted_flower is None:
         st.info("💡 Điền thông số ở cột bên trái và bấm nút 'Dự đoán' để kích hoạt máy ảnh nhận diện!")
         st.image("https://upload.wikimedia.org/wikipedia/commons/7/78/Petal-sepal.jpg", 
                  caption="Sơ đồ cấu trúc Đài hoa (Sepal) và Cánh hoa (Petal)", 
                  use_container_width=True)
     else:
-        # Nếu đã dự đoán ra hoa, lôi hình ảnh thực tế của loài hoa đó ra hiển thị
         hoa = st.session_state.predicted_flower
         do_tin_cay = st.session_state.confidence
         thong_tin_hoa = HÌNH_ẢNH_HOA[hoa]
         
-        # Hiển thị thông báo kết quả kèm màu sắc tương ứng
         if hoa == "Iris-setosa":
             st.success(f"🎉 Kết quả: **{hoa}** (Độ tin cậy: {do_tin_cay:.2f}%) 🔴")
         elif hoa == "Iris-versicolor":
@@ -118,5 +111,4 @@ with col_phai:
         else:
             st.warning(f"🎉 Kết quả: **{hoa}** (Độ tin cậy: {do_tin_cay:.2f}%) 🔵")
             
-        # Hiển thị ảnh hoa thực tế dựa trên kết quả dự đoán
         st.image(thong_tin_hoa["url"], caption=f"Hình ảnh thực tế loài hoa {hoa}. {thong_tin_hoa['mota']}", use_container_width=True)
