@@ -123,7 +123,7 @@ with tab1:
 
 # Tab đánh giá mô hình
 with tab2:
-        st.markdown("## :chart_with_upwards_trend: Kết Quả Thực Nghiệm Mạng Neural Nhân Tạo (ANN)")
+    st.markdown("## :chart_with_upwards_trend: Kết Quả Thực Nghiệm Mạng Neural Nhân Tạo (ANN)")
     st.write("Số liệu thu được trong quá trình huấn luyện và kiểm thử mô hình trên tập dữ liệu Iris.")
     
     # Hiển thị các ô chỉ số lớn
