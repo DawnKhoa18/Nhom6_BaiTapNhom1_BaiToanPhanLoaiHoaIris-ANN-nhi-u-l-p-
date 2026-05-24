@@ -100,9 +100,9 @@ with tab1:
             st.table(proba_df)
 
     with col_phai:
-        st.markdown("### :desktop_computer: Kết quả kết xuất hình ảnh")
+        st.markdown("### :desktop_computer: Kết quả hình ảnh")
         if st.session_state.pred_flower is None:
-            st.info("Điền thông số ở cột bên trái và bấm nút 'Dự đoán' để kích hoạt máy ảnh nhận diện!")
+            st.info("Điền thông số ở cột bên trái và bấm nút 'Dự đoán' để xem ảnh nhận diện!")
             st.image("https://upload.wikimedia.org/wikipedia/commons/7/78/Petal-sepal.jpg", 
                      caption="Sơ đồ cấu trúc Đài hoa (Sepal) và Cánh hoa (Petal)", use_container_width=True)
         else:
@@ -186,7 +186,7 @@ with tab2:
         report = classification_report(metrics_data['y_test'], metrics_data['y_pred'], target_names=label_encoder.classes_)
         st.code(report, language="text")
         
-        st.info(":light_bulb: **Giải thích:**\n"
-                "- **Precision:** Tỉ lệ dự đoán đúng trong những ca mô hình đoán là loài hoa đó.\n"
+        st.info(":**Giải thích:**\n"
+                "- **Precision:** Tỉ lệ dự đoán đúng trong những mô hình đoán là loài hoa đó.\n"
                 "- **Recall:** Tỉ lệ tìm thấy đúng loài hoa đó trên tổng số hoa thực tế.\n"
                 "- **F1-score:** Chỉ số trung bình điều hòa giữa Precision và Recall.")
