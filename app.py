@@ -10,7 +10,6 @@ from sklearn.metrics import classification_report
 # Giao diện Web
 st.set_page_config(
     page_title="Phân loại Hoa Iris - Nhóm 6",
-    page_icon=":flower:",
     layout="wide"
 )
 
@@ -54,7 +53,7 @@ HÌNH_ẢNH_HOA = {
 }
 
 # Tiêu đề
-st.title(":flower: Phân Tích & Phân Loại Hoa Iris (ANN)")
+st.title("Phân Tích & Phân Loại Hoa Iris (ANN)")
 st.subheader("Nhóm 6")
 st.markdown("---")
 
@@ -66,7 +65,7 @@ with tab1:
     col_trai, col_phai = st.columns([1, 1])
     
     with col_trai:
-        st.markdown("### :input_numbers: Nhập thông số đặc trưng (cm):")
+        st.markdown("### Nhập thông số đặc trưng (cm):")
         sub_col1, sub_col2 = st.columns(2)
         with sub_col1:
             sepal_length = st.number_input("Chiều dài đài hoa (Sepal Length)", min_value=0.0, max_value=10.0, value=5.1, step=0.1)
@@ -103,7 +102,7 @@ with tab1:
     with col_phai:
         st.markdown("### :desktop_computer: Kết quả kết xuất hình ảnh")
         if st.session_state.pred_flower is None:
-            st.info(":light_bulb: Điền thông số ở cột bên trái và bấm nút 'Dự đoán' để kích hoạt máy ảnh nhận diện!")
+            st.info("Điền thông số ở cột bên trái và bấm nút 'Dự đoán' để kích hoạt máy ảnh nhận diện!")
             st.image("https://upload.wikimedia.org/wikipedia/commons/7/78/Petal-sepal.jpg", 
                      caption="Sơ đồ cấu trúc Đài hoa (Sepal) và Cánh hoa (Petal)", use_container_width=True)
         else:
@@ -129,16 +128,16 @@ with tab2:
     # Hiển thị các ô chỉ số lớn
     metric_col1, metric_col2, metric_col3 = st.columns(3)
     with metric_col1:
-        st.metric(label=":target: Độ chính xác tập Test (Accuracy)", value=f"{metrics_data['test_accuracy']*100:.2f}%")
+        st.metric(label="Độ chính xác tập Test (Accuracy)", value=f"{metrics_data['test_accuracy']*100:.2f}%")
     with metric_col2:
-        st.metric(label=":chart: Độ mất mát tập Test (Loss)", value=f"{metrics_data['test_loss']:.4f}")
+        st.metric(label="Độ mất mát tập Test (Loss)", value=f"{metrics_data['test_loss']:.4f}")
     with metric_col3:
-        st.metric(label=":gear: Thuật toán tối ưu", value="Adam")
+        st.metric(label="Thuật toán tối ưu", value="Adam")
 
     st.markdown("---")
     
     # Vẽ biểu đồ Accuracy & Loss qua các Epoch
-    st.subheader(":chart_with_features: Biểu đồ Quá trình Huấn luyện")
+    st.subheader(":chart_with_upwards_trend: Biểu đồ Quá trình Huấn luyện")
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
     
