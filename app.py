@@ -81,7 +81,7 @@ with tab1:
             st.session_state.conf = 0.0
             st.session_state.prob = None
 
-        if st.button(":crystal_ball: Tiến hành dự đoán", type="primary", use_container_width=True):
+        if st.button(":crystal_ball: Dự đoán", type="primary", use_container_width=True):
             input_data = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
             input_scaled = scaler.transform(input_data)
             prediction_proba = model.predict(input_scaled)
