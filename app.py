@@ -111,11 +111,11 @@ with tab1:
             thong_tin_hoa = HÌNH_ẢNH_HOA[hoa]
             
             if hoa == "Iris-setosa":
-                st.success(f":tada: Kết quả: **{hoa}** (Độ tin cậy: {do_tin_cay:.2f}%) :red_circle:")
+                st.success(f":tada: Kết quả: **{hoa}** (Độ tin cậy: {do_tin_cay:.2f}%)")
             elif hoa == "Iris-versicolor":
-                st.info(f":tada: Kết quả: **{hoa}** (Độ tin cậy: {do_tin_cay:.2f}%) :green_circle:")
+                st.info(f":tada: Kết quả: **{hoa}** (Độ tin cậy: {do_tin_cay:.2f}%)")
             else:
-                st.warning(f":tada: Kết quả: **{hoa}** (Độ tin cậy: {do_tin_cay:.2f}%) :large_blue_circle:")
+                st.warning(f":tada: Kết quả: **{hoa}** (Độ tin cậy: {do_tin_cay:.2f}%)")
                 
             st.image(thong_tin_hoa["url"], caption=f"Hình ảnh thực tế loài hoa {hoa}. {thong_tin_hoa['mota']}", use_container_width=True)
 
