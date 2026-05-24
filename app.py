@@ -101,7 +101,7 @@ with tab1:
             st.table(proba_df)
 
     with col_phai:
-       st.markdown("### :desktop_computer: Kết quả kết xuất hình ảnh")
+        st.markdown("### :desktop_computer: Kết quả kết xuất hình ảnh")
         if st.session_state.pred_flower is None:
             st.info(":light_bulb: Điền thông số ở cột bên trái và bấm nút 'Dự đoán' để kích hoạt máy ảnh nhận diện!")
             st.image("https://upload.wikimedia.org/wikipedia/commons/7/78/Petal-sepal.jpg", 
